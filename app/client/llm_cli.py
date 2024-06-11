@@ -6,7 +6,6 @@ File: llm_cli.py
 Time: 2024/6/10
 """
 import asyncio
-from abc import ABC
 from typing import Dict, Any, List
 
 from langchain.callbacks import AsyncIteratorCallbackHandler
@@ -18,7 +17,9 @@ from conf.conf import OPENAI_API_KEY, OPENAI_API_BASE
 
 
 class CustomAsyncStreamHandler(AsyncIteratorCallbackHandler):
-    async def on_llm_start(self, serialized: Dict[str, Any], prompts: List[str], **kwargs: Any) -> None:
+    async def on_llm_start(
+        self, serialized: Dict[str, Any], prompts: List[str], **kwargs: Any
+    ) -> None:
         self.done.clear()
 
     async def on_llm_new_token(self, token: str, **kwargs: Any) -> None:
@@ -40,7 +41,7 @@ async def call_llm(message: str):
         streaming=True,
         callbacks=[_callback],
         api_key=OPENAI_API_KEY,
-        base_url=OPENAI_API_BASE
+        base_url=OPENAI_API_BASE,
     )
 
     task = asyncio.create_task(llm.ainvoke(msg))
@@ -54,7 +55,8 @@ async def call_llm(message: str):
 async def main():
     message = "python 是什么"
     async for token in call_llm(message):
-        print(token, end='', flush=True)
+        print(token, end="", flush=True)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     asyncio.run(main())

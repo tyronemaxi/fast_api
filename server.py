@@ -19,6 +19,7 @@ class StreamRequest(BaseModel):
     """
     Request body for streaming
     """
+
     message: str
 
 
@@ -27,5 +28,5 @@ def stream(body: StreamRequest):
     return StreamingResponse(call_llm(body.message), media_type="text/event-stream")
 
 
-if __name__ == '__main__':
-    uvicorn.run(app=app, port=8080, host='0.0.0.0')
+if __name__ == "__main__":
+    uvicorn.run(app=app, port=8080, host="0.0.0.0")
