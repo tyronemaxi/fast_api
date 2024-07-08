@@ -1,5 +1,4 @@
-# See https://pre-commit.com for more information
-# See https://pre-commit.com/hooks.html for more hooks
+# Please run command `pre-commit install` to install pre-commit hook
 default_stages:
     - commit
 default_language_version:
