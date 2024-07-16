@@ -5,6 +5,7 @@ Author: tyrone
 File: llm_cli.py
 Time: 2024/6/10
 """
+import ujson
 import asyncio
 from typing import Dict, Any, List
 
@@ -47,7 +48,9 @@ async def call_llm(message: str):
     task = asyncio.create_task(llm.ainvoke(msg))
 
     async for token in _callback.aiter():
-        yield token
+        data = {"text": token, "data_type": "text"}
+        j_data = ujson.dumps(data, ensure_ascii=False)
+        yield j_data + "\n"
 
     await task
 

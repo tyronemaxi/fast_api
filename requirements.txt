@@ -2,7 +2,9 @@ fastapi==0.111.0
 fastapi-cli==0.0.4
 
 langchain==0.2.3
-langchain-core==0.2.5
+langchain-core==0.2.19
 langchain-text-splitters==0.2.1
 langchain-community==0.2.4
 pre-commit==3.7.1
+
+openai==1.35.14
