@@ -50,7 +50,7 @@ async def call_llm(message: str):
     async for token in _callback.aiter():
         data = {"text": token, "data_type": "text"}
         j_data = ujson.dumps(data, ensure_ascii=False)
-        yield j_data + "\n"
+        yield f"data: {j_data}\n\n"
 
     await task
 
